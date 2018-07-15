@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import * as moment from 'moment';
 import {ChannelService} from "./services/channel.service";
 import {IChannel} from "./model/IChannel";
@@ -6,15 +6,16 @@ import {IChannel} from "./model/IChannel";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  styleUrls: ['app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit{
   public channelsByDate:IChannel[][];
   constructor(private channelService:ChannelService){
-    this.init();
   }
 
-  private init() {
+  ngOnInit() {
     this.channelService.getChannels().subscribe(channels => {
       const sortedChannel = this.getSortedChannels(channels);
       this.channelsByDate = this.getChannelsByDate(sortedChannel);
