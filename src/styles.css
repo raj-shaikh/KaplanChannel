@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #F4F6F9 !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 0.875rem !important;
+}
+
+.subject-image {
+  border-radius: 50%;
+  width: 30px;
+  margin: 0px 10px;
+}
+
+.bold-font {
+  font-weight: 600;
+}
