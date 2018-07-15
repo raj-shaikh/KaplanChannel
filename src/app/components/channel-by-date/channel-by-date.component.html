@@ -1,3 +1,4 @@
-<p>
-  channel-by-date works!
-</p>
+<div class="m-2">
+  <h5 class="bold-font">{{formattedDate}}</h5>
+  <app-channel-tile *ngFor="let channel of channels" [channel]="channel"></app-channel-tile>
+</div>

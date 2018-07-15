@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {Observable} from "rxjs";
+import {of} from "rxjs";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -6,13 +9,42 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public channels:IChannel[];
+  public channelsByDate:IChannel[][];
   constructor(){
     this.init();
   }
 
   private init() {
-    this.channels = [
+    this.getChannels().subscribe(channels => {
+      const sortedChannel = this.getSortedChannels(channels);
+      this.channelsByDate = this.getChannelsByDate(sortedChannel);
+    })
+  }
+
+  private getChannelsByDate(channels: IChannel[]): IChannel[][]{
+    const dates: Map<string, IChannel[]> = new Map<string, IChannel[]>();
+    channels.map((channel) => {
+      const date = moment(channel.time).format('YYYY-MM-DD');
+      const uniqueDates:IChannel[] = dates.get(date);
+      if(uniqueDates){
+        uniqueDates.push(channel);
+      }else{
+        dates.set(date, [channel]);
+      }
+    });
+    return Array.from(dates.values());
+  }
+
+  private getSortedChannels(channels: IChannel[]) : IChannel[] {
+    return channels.sort((channelA:IChannel, channelsB:IChannel) => {
+      const momentA = moment(channelA.time);
+      const momentB = moment(channelsB.time);
+      return  momentA.diff(momentB);
+    })
+  }
+
+  private getChannels(): Observable<IChannel[]>{
+    const channel:IChannel[] = [
       {
         "title":"Nulla convallis dolor quis erat.",
         "description":"Sed hendrerit luctus finibus. Sed justo dui, vulputate ac suscipit condimentum, porttitor sed dolor. Ut eu justo at metus dapibus facilisis a quis libero. Integer lectus turpis, pretium a tincidunt.",
@@ -77,7 +109,8 @@ export class AppComponent {
         "subjectPhotoUrl":"https://placeholdit.imgix.net/~text?txtsize=34&txt=D&w=60&h=60",
         "time":"2016-01-03 21:00:00"
       }
-    ]
+    ];
+    return of(channel);
   }
 
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {IChannel} from "../../app.component";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-channel-by-date',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChannelByDateComponent implements OnInit {
 
+  @Input('channels')
+  channels:IChannel[];
+
+  public formattedDate: string;
+
   constructor() { }
 
   ngOnInit() {
+    this.formattedDate = moment(this.channels[0].time).format('ddd, MMMM DD, YYYY');
   }
 
 }
