@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {IChannel} from "../../app.component";
 import * as moment from 'moment';
+import {IChannel} from "../../model/IChannel";
 
 @Component({
   selector: 'app-channel-by-date',

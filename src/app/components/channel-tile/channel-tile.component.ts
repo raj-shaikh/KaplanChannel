@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {IChannel} from "../../app.component";
 import * as moment from 'moment';
 import * as mtz from "moment-timezone";
+import {IChannel} from "../../model/IChannel";
 
 @Component({
   selector: 'app-channel-tile',

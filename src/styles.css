@@ -12,3 +12,7 @@ body {
 .bold-font {
   font-weight: 600;
 }
+
+.card {
+  border-radius: 0px !important;
+}
