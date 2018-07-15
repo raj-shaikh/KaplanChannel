@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-1">
+        <img [src]="channel.subjectPhotoUrl" alt="" class="subject-image">
+      </div>
+      <div class="col-md-6">
+        <h5 class="card-title bold-font">{{channel.title}}</h5>
+        <p class="card-text">{{channel.description}}</p>
+      </div>
+      <div class="col-md-2">
+        <img [src]="channel.instructorPhotoUrl" alt="" class="subject-image float-left">
+        <p class="card-text bold-font">{{channel.instructorName}}</p>
+      </div>
+      <div class="col-md-3">
+        <p class="card-text bold-font">{{channel.time}}</p>
+      </div>
+    </div>
+  </div>
+</div>
